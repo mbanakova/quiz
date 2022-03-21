@@ -2,47 +2,51 @@
 	<main class="start">
 		<div class="card">
 			<h1>Данные для рейтинга:</h1>
-			<form @submit.prevent="saveCredentials" class="credentials">
-				<div class="form-group" :class="{ invalid: !username.isValid }">
-					<input
-						type="text"
-						id="name"
-						placeholder="Имя Фамилия"
-						v-model.trim="username.val"
-						@blur="clearValidity('username')"
-					/>
-				</div>
-				<div class="form-group" :class="{ invalid: !age.isValid }">
-					<input
-						type="number"
-						id="age"
-						placeholder="Возраст"
-						v-model.number="age.val"
-						@blur="clearValidity('age')"
-					/>
-				</div>
-				<div class="form-group">
-					<input
-						type="radio"
-						name="sex"
-						id="male"
-						value="male"
-						checked
-						v-model="sex.val"
-					/>
-					<label for="male"> Мужчина </label>
+			<keep-alive>
+				<form @submit.prevent="saveCredentials" class="credentials">
+					<div class="form-group" :class="{ invalid: !username.isValid }">
+						<input
+							type="text"
+							id="name"
+							placeholder="Имя Фамилия"
+							v-model.trim="username.val"
+							@blur="clearValidity('username')"
+						/>
+					</div>
+					<div class="form-group" :class="{ invalid: !age.isValid }">
+						<input
+							type="number"
+							id="age"
+							placeholder="Возраст"
+							v-model.number="age.val"
+							@blur="clearValidity('age')"
+						/>
+					</div>
+					<div class="form-group">
+						<input
+							type="radio"
+							name="sex"
+							id="male"
+							value="male"
+							checked
+							v-model="sex.val"
+						/>
+						<label for="male"> Мужчина </label>
 
-					<input
-						type="radio"
-						name="sex"
-						id="female"
-						value="female"
-						v-model="sex.val"
-					/><label for="female"> Женщина</label>
-				</div>
-				<p v-if="!formIsValid">Все поля обязательны. Возраст от 3 до 99 лет.</p>
-				<button class="button">Поехали!</button>
-			</form>
+						<input
+							type="radio"
+							name="sex"
+							id="female"
+							value="female"
+							v-model="sex.val"
+						/><label for="female"> Женщина</label>
+					</div>
+					<p v-if="!formIsValid">
+						Все поля обязательны. Возраст от 3 до 99 лет.
+					</p>
+					<button class="button">Поехали!</button>
+				</form></keep-alive
+			>
 		</div>
 	</main>
 </template>
@@ -68,6 +72,7 @@ export default {
 			formIsValid: true,
 		};
 	},
+
 	methods: {
 		validateCredentials() {
 			this.formIsValid = true;
@@ -127,24 +132,43 @@ export default {
 	border: 1px solid $med-accent;
 }
 
+.form-group {
+	display: flex;
+	gap: 20px;
+
+	@media (max-width: $mobile) {
+		gap: 10px;
+	}
+}
 label {
 	padding: 5px 20px;
-	margin-right: 20px;
+	text-align: center;
 	cursor: pointer;
+
+	@media (max-width: $mobile) {
+		margin-right: 0;
+	}
 }
 
 input[type="radio"] {
-	-webkit-appearance: none;
-	-moz-appearance: none;
 	appearance: none;
 	position: absolute;
 	padding: 0;
 	margin: 0;
 }
+
+#male ~ label[for="male"] {
+	border: 1px solid $man;
+	flex-grow: 1;
+}
 #male:checked ~ label[for="male"] {
 	background-color: $man;
 }
 
+#female ~ label[for="female"] {
+	border: 1px solid $lady;
+	flex-grow: 1;
+}
 #female:checked ~ label[for="female"] {
 	background-color: $lady;
 }

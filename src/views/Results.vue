@@ -1,9 +1,9 @@
 <template>
 	<main>
 		<div class="my-result" v-if="getUserResult">
-			<h3>Твой последний результат:</h3>
-			<p>{{ getUserResult.correctAnswers }} правильных ответа</p>
-			<p>{{ getUserResult.wrongAnswers }} неправильных ответа</p>
+			<h3>Итог:</h3>
+			<p>{{ getUserResult.correctAnswers }} правильных ответа,</p>
+			<p>{{ getUserResult.wrongAnswers }} неправильных ответа,</p>
 			<p>{{ getUserResult.time }} секунд</p>
 		</div>
 		<RatingList />
@@ -25,9 +25,24 @@ export default {
 <style lang="scss" scoped>
 .my-result {
 	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 	gap: 20px;
-	border: 2px dashed #d40ff3;
-	padding: 0 20px;
+	border: 3px dashed #4c709f;
+	padding: 10px 20px;
 	margin-bottom: 20px;
+	@media (max-width: $mobile) {
+		gap: 10px;
+		padding: 10px;
+	}
+	& h3,
+	& p {
+		margin: 0;
+
+		@media (max-width: $mobile) {
+			font-size: 12px;
+			line-height: 15px;
+		}
+	}
 }
 </style>

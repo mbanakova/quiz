@@ -1,7 +1,7 @@
 <template>
 	<main>
 		<div class="card">
-			<h1>Привет, {{ getUserName }}!</h1>
+			<h2>Привет, {{ getUserName }}!</h2>
 			<p>Считаешь себя человеком с широким кругозором? Давай проверим!</p>
 			<p>
 				Впереди тест из 20 вопросов на самые разнообразные темы — окружающий
@@ -35,8 +35,17 @@ export default {
 	flex-direction: column;
 	gap: 20px;
 }
+
+h2 {
+	margin-bottom: 0;
+}
 p {
 	margin: 0;
+
+	@media (max-width: $mobile) {
+		font-size: 15px;
+		line-height: 18px;
+	}
 }
 .button {
 	align-self: flex-end;

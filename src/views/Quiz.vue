@@ -8,7 +8,7 @@
 		</div>
 
 		<form class="card">
-			<h2>{{ getQuestions[index]["question"] }}</h2>
+			<h3>{{ getQuestions[index]["question"] }}</h3>
 			<div class="img" v-if="getQuestions[index]['img']">
 				<img :src="getQuestions[index]['img']" alt="" />
 			</div>
@@ -38,7 +38,7 @@
 					Дальше
 				</button>
 				<router-link
-					v-show="(selectedAnswer && isLastQuestion) || timer === 300"
+					v-show="selectedAnswer && isLastQuestion"
 					to="/results"
 					@click="saveResults"
 					class="button"
@@ -61,6 +61,7 @@ export default {
 			wrongAnswers: 0,
 			bar: 0,
 			timer: 0,
+			timeout: 300,
 			interval: "",
 		};
 	},
@@ -117,22 +118,42 @@ export default {
 		},
 		setTimer() {
 			this.interval = setInterval(() => {
-				if (this.timer === 300 || this.bar === this.getQuestions.length) {
+				if (this.bar === this.getQuestions.length) {
 					clearInterval(this.interval);
 				} else {
 					this.timer++;
 				}
 			}, 1000);
 		},
-		gameOver() {},
+		gameOver() {
+			this.wrongAnswers = this.getQuestions.length - this.correctAnswers;
+			this.saveResults();
+			this.$router.replace("/results");
+		},
+	},
+	watch: {
+		timer() {
+			if (this.timer === this.timeout) {
+				this.gameOver();
+			}
+		},
 	},
 };
 </script>
 
 <style lang="scss" scoped>
+h1 {
+	@media (max-width: $mobile) {
+		font-size: 18px;
+	}
+}
 .progress {
 	position: relative;
 	margin-bottom: 40px;
+
+	@media (max-width: $mobile) {
+		margin-bottom: 20px;
+	}
 }
 .progress-bar {
 	display: flex;
@@ -171,10 +192,7 @@ p {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-}
-h2 {
-	text-align: center;
-	user-select: none;
+	transition: $tr;
 }
 
 form {
@@ -182,7 +200,18 @@ form {
 	flex-direction: column;
 	align-items: center;
 	gap: 30px;
+
+	& h3 {
+		margin-bottom: 0;
+		text-align: center;
+		user-select: none;
+
+		@media (max-width: $mobile) {
+			text-align: left;
+		}
+	}
 }
+
 .answers {
 	display: flex;
 	flex-direction: column;
@@ -190,6 +219,10 @@ form {
 	gap: 10px;
 	width: 400px;
 	user-select: none;
+
+	@media (max-width: $mobile) {
+		width: 100%;
+	}
 }
 
 .img {

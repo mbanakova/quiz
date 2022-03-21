@@ -3,18 +3,18 @@
 	<table>
 		<thead>
 			<tr>
-				<th>username</th>
+				<th>Участник:</th>
 				<th @click="sort('best')" :class="{ selected: sorting === 'best' }">
-					правильных ответов
+					Правильных ответов:
 				</th>
 				<th @click="sort('worst')" :class="{ selected: sorting === 'worst' }">
-					неправильных ответов
+					Неправильных ответов:
 				</th>
 				<th @click="sort('fast')" :class="{ selected: sorting === 'fast' }">
-					время
+					Время:
 				</th>
 				<th @click="sort('young')" :class="{ selected: sorting === 'young' }">
-					возраст
+					Возраст:
 				</th>
 			</tr>
 		</thead>
@@ -118,6 +118,15 @@ table {
 	& th {
 		padding: 10px;
 		border-spacing: unset;
+
+		@media (max-width: $mobile) {
+			padding: 5px;
+		}
+	}
+
+	@media (max-width: $mobile) {
+		font-size: 10px;
+		line-height: 12px;
 	}
 }
 thead {
@@ -131,13 +140,20 @@ th {
 
 tr.card {
 	background-color: $man;
-
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 	&.lady {
 		background-color: $lady;
 	}
 
 	&.me {
-		border: 2px dashed #d40ff3;
+		border: 4px dashed #4c709f;
+		@media (max-width: $mobile) {
+			border-width: 2px;
+		}
+	}
+
+	@media (max-width: $mobile) {
+		padding: 5px;
 	}
 }
 

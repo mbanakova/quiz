@@ -1,6 +1,9 @@
 <template>
 	<TheNav />
-	<router-view />
+	<router-view v-slot="slotProps">
+		<transition name="route" mode="out-in">
+			<component :is="slotProps.Component"> </component> </transition
+	></router-view>
 </template>
 <script>
 import TheNav from "@/components/TheNav";
@@ -40,6 +43,10 @@ main {
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
+
+	@media (max-width: $mobile) {
+		padding-top: 20px;
+	}
 }
 .route-enter-from {
 	opacity: 0;
@@ -101,7 +108,7 @@ h1 {
 	}
 
 	@media (max-width: $mobile) {
-		font-size: 26px;
+		font-size: 22px;
 	}
 }
 
@@ -115,7 +122,7 @@ h2 {
 	}
 
 	@media (max-width: $mobile) {
-		font-size: 22px;
+		font-size: 20px;
 	}
 }
 
@@ -128,7 +135,7 @@ h3 {
 	}
 
 	@media (max-width: $mobile) {
-		font-size: 18px;
+		font-size: 16px;
 	}
 }
 

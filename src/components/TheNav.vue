@@ -19,11 +19,17 @@ nav {
 	padding: 10px;
 	background-color: $blue;
 	color: $white;
-
+	@media (max-width: $mobile) {
+		gap: 10px;
+	}
 	& a {
 		color: inherit;
 		text-decoration: none;
 		padding: 5px 20px;
+
+		@media (max-width: $mobile) {
+			padding: 5px 15px;
+		}
 
 		&.router-link-active {
 			border: 1px solid $bright;

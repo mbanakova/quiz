@@ -1,34 +1,42 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store/index.js'
 import Start from '../views/Start.vue'
-
-const routes = [
-  {
-    path: '/',
-    name: 'Start',
-    component: Start
-  }, {
-    path: '/intro',
-    name: 'Intro',
-    component: () => import('../views/Intro.vue')
-  },
-  {
-    path: '/quiz',
-    name: 'Quiz',
-    component: () => import('../views/Quiz.vue')
-  },
-  {
-    path: '/results',
-    name: 'Results',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('../views/Results.vue')
-  }
-]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes: [
+    {
+      path: '/',
+      name: 'Start',
+      component: Start
+    }, {
+      path: '/intro',
+      name: 'Intro',
+      component: () => import('../views/Intro.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/quiz',
+      name: 'Quiz',
+      component: () => import('../views/Quiz.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/results',
+      name: 'Results',
+      component: () => import('../views/Results.vue'),
+      meta: { requiresAuth: true }
+    }
+  ]
 })
+
+// global nav guard
+router.beforeEach(function (to, _, next) {
+  if (to.meta.requiresAuth && !store.getters.getUserName) {
+    next('/');
+  } else {
+    next();
+  }
+});
 
 export default router

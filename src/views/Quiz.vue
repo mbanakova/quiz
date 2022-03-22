@@ -63,6 +63,7 @@ export default {
 			timer: 0,
 			timeout: 300,
 			interval: "",
+			answers: [],
 		};
 	},
 	computed: {
@@ -93,6 +94,8 @@ export default {
 			} else {
 				this.wrongAnswers++;
 			}
+			this.answers.push(this.selectedAnswer);
+
 			this.bar++;
 			this.increment();
 		},
@@ -112,8 +115,10 @@ export default {
 				age: user.age,
 				sex: user.sex,
 			};
+			const answers = this.answers;
 
 			this.$store.dispatch("saveResults", result);
+			this.$store.dispatch("addUserAnswers", answers);
 			this.$store.dispatch("addUserResult", result);
 		},
 		setTimer() {

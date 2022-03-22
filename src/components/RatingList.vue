@@ -113,6 +113,7 @@ export default {
 table {
 	text-align: center;
 	border-collapse: collapse;
+	margin-bottom: 50px;
 
 	& td,
 	& th {

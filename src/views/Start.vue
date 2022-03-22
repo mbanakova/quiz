@@ -1,52 +1,48 @@
 <template>
 	<main class="start">
 		<div class="card">
-			<h1>Данные для рейтинга:</h1>
-			<keep-alive>
-				<form @submit.prevent="saveCredentials" class="credentials">
-					<div class="form-group" :class="{ invalid: !username.isValid }">
-						<input
-							type="text"
-							id="name"
-							placeholder="Имя Фамилия"
-							v-model.trim="username.val"
-							@blur="clearValidity('username')"
-						/>
-					</div>
-					<div class="form-group" :class="{ invalid: !age.isValid }">
-						<input
-							type="number"
-							id="age"
-							placeholder="Возраст"
-							v-model.number="age.val"
-							@blur="clearValidity('age')"
-						/>
-					</div>
-					<div class="form-group">
-						<input
-							type="radio"
-							name="sex"
-							id="male"
-							value="male"
-							checked
-							v-model="sex.val"
-						/>
-						<label for="male"> Мужчина </label>
+			<form @submit.prevent="saveCredentials" class="credentials">
+				<h1>Данные для рейтинга:</h1>
+				<div class="form-group" :class="{ invalid: !username.isValid }">
+					<input
+						type="text"
+						id="name"
+						placeholder="Имя"
+						v-model.trim="username.val"
+						@blur="clearValidity('username')"
+					/>
+				</div>
+				<div class="form-group" :class="{ invalid: !age.isValid }">
+					<input
+						type="number"
+						id="age"
+						placeholder="Возраст"
+						v-model.number="age.val"
+						@blur="clearValidity('age')"
+					/>
+				</div>
+				<div class="form-group">
+					<input
+						type="radio"
+						name="sex"
+						id="male"
+						value="male"
+						checked
+						v-model="sex.val"
+					/>
+					<label for="male"><font-awesome icon="person" /></label>
 
-						<input
-							type="radio"
-							name="sex"
-							id="female"
-							value="female"
-							v-model="sex.val"
-						/><label for="female"> Женщина</label>
-					</div>
-					<p v-if="!formIsValid">
-						Все поля обязательны. Возраст от 3 до 99 лет.
-					</p>
-					<button class="button">Поехали!</button>
-				</form></keep-alive
-			>
+					<input
+						type="radio"
+						name="sex"
+						id="female"
+						value="female"
+						v-model="sex.val"
+					/><label for="female"><font-awesome icon="person-dress" /></label>
+				</div>
+				<p v-if="!formIsValid">Все поля обязательны. Возраст от 3 до 99 лет.</p>
+				<button class="button">Поехали!</button>
+			</form>
 		</div>
 	</main>
 </template>
@@ -94,6 +90,7 @@ export default {
 				return;
 			}
 			const userCredentials = {
+				id: this.username.val,
 				username: this.username.val,
 				age: this.age.val,
 				sex: this.sex.val,

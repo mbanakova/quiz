@@ -3,6 +3,7 @@ import start from './start'
 import result from './result'
 import rating from './rating'
 import quiz from './quiz'
+import answers from './answers'
 
 export default createStore({
   state: {
@@ -18,6 +19,6 @@ export default createStore({
 
   },
   modules: {
-    start, result, rating, quiz
+    start, result, rating, quiz, answers
   }
 })

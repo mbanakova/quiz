@@ -24,13 +24,16 @@ const router = createRouter({
     {
       path: '/results',
       name: 'Results',
-      component: () => import('../views/Results.vue'),
-      meta: { requiresAuth: true }
+      component: () => import('../views/Results.vue')
+    },
+    {
+      path: '/statistics',
+      name: 'Statistics',
+      component: () => import('../views/Statistics.vue')
     }
   ]
 })
 
-// global nav guard
 router.beforeEach(function (to, _, next) {
   if (to.meta.requiresAuth && !store.getters.getUserName) {
     next('/');

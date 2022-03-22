@@ -7,6 +7,9 @@
 			<p>{{ getUserResult.time }} секунд</p>
 		</div>
 		<RatingList />
+		<router-link to="/statistics" @click="loadStatistics" class="button"
+			>смотреть ответы</router-link
+		>
 	</main>
 </template>
 
@@ -18,6 +21,11 @@ export default {
 	components: { RatingList },
 	computed: {
 		...mapGetters(["getUserResult"]),
+	},
+	methods: {
+		async loadStatistics() {
+			await this.$store.dispatch("combineStatistics");
+		},
 	},
 };
 </script>
@@ -44,5 +52,9 @@ export default {
 			line-height: 15px;
 		}
 	}
+}
+
+.button {
+	align-self: flex-end;
 }
 </style>

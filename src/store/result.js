@@ -1,11 +1,15 @@
 
 export default {
   state: {
-    result: null
+    result: null,
+    answers: []
   },
   mutations: {
     saveResults(state, result) {
       state.result = result;
+    },
+    saveAnswers(state, answers) {
+      state.answers = answers;
     }
   },
   actions: {
@@ -34,7 +38,25 @@ export default {
 
       context.commit("saveResults", result)
     },
-    async getResult(context) {
+    async saveAnswers(context, answers) {
+
+      const response = await fetch('https://quiz-49060-default-rtdb.firebaseio.com/answers.json', {
+        method: 'POST',
+        body: JSON.stringify({
+          ...answers
+        })
+      })
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        const error = new Error(responseData.message);
+        throw error;
+      }
+
+
+      context.commit("saveAnswers", answers)
+    },
+    async getResults(context) {
       const response = await fetch('https://quiz-49060-default-rtdb.firebaseio.com/result.json')
 
       const responseData = await response.json();
@@ -52,7 +74,7 @@ export default {
         age: responseData.age,
         sex: responseData.sex,
       }
-      context.commit("getResult", result)
+      context.commit("getRating", result)
     },
 
   },

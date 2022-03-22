@@ -16,7 +16,6 @@ export default {
 </script>
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-// $dark: #030105;
 
 *,
 *::before,
@@ -78,7 +77,11 @@ main {
 	min-height: 100vh;
 	overflow-x: hidden;
 }
-
+img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
 .wrapper {
 	max-width: 1440px;
 	width: 100%;
@@ -86,7 +89,7 @@ main {
 	margin: 0 auto;
 
 	@media (max-width: $tablet) {
-		padding-top: 90px;
+		padding-top: 20px;
 	}
 }
 
@@ -98,7 +101,7 @@ main {
 }
 
 h1 {
-	margin: 0 auto 15px;
+	margin: 0 auto;
 	font-size: 26px;
 	line-height: 110%;
 	align-self: center;
@@ -113,7 +116,7 @@ h1 {
 }
 
 h2 {
-	margin: 0 auto 15px;
+	margin: 0 auto;
 	font-size: 24px;
 	line-height: 110%;
 
@@ -127,7 +130,7 @@ h2 {
 }
 
 h3 {
-	margin: 0 auto 15px;
+	margin: 0 auto;
 	font-size: 22px;
 	line-height: 110%;
 	@media (max-width: $tablet) {

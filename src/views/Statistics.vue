@@ -16,7 +16,7 @@
 						class="answer-bar"
 						:class="{ correct: index.correctAnswer == answer.letter }"
 					>
-						<div>{{ answer.title }}</div>
+						<div>{{ answer.title.title }}</div>
 						<div>Ответов: {{ answer.statistics }}</div>
 					</li>
 				</ul>
@@ -31,9 +31,6 @@ import { mapGetters } from "vuex";
 export default {
 	computed: {
 		...mapGetters(["getStatistics"]),
-		// isCorrect() {
-		// 	return this.getStatistics.stats.question.correctAnswer == "";
-		// },
 	},
 };
 </script>

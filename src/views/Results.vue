@@ -7,7 +7,11 @@
 			<p>{{ getUserResult.time }} секунд</p>
 		</div>
 		<RatingList />
-		<router-link to="/statistics" @click="loadStatistics" class="button"
+		<router-link
+			to="/statistics"
+			@click="loadStatistics"
+			class="button"
+			v-if="getUserResult"
 			>смотреть ответы</router-link
 		>
 	</main>
@@ -24,7 +28,8 @@ export default {
 	},
 	methods: {
 		async loadStatistics() {
-			await this.$store.dispatch("combineStatistics");
+			// await this.$store.dispatch("combineStatistics");
+			await this.$store.dispatch("fetchStatistics");
 		},
 	},
 };
@@ -39,10 +44,12 @@ export default {
 	border: 3px dashed #4c709f;
 	padding: 10px 20px;
 	margin-bottom: 20px;
+
 	@media (max-width: $mobile) {
 		gap: 10px;
 		padding: 10px;
 	}
+
 	& h3,
 	& p {
 		margin: 0;

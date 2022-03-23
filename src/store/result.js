@@ -34,8 +34,6 @@ export default {
         const error = new Error(responseData.message);
         throw error;
       }
-
-
       context.commit("saveResults", result)
     },
     async saveAnswers(context, answers) {
@@ -52,7 +50,6 @@ export default {
         const error = new Error(responseData.message);
         throw error;
       }
-
 
       context.commit("saveAnswers", answers)
     },
@@ -76,9 +73,7 @@ export default {
       }
       context.commit("getRating", result)
     },
-
   },
-
 
   getters: {
     getUserResult(state) {

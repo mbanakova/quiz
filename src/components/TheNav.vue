@@ -1,14 +1,17 @@
 <template>
 	<nav>
 		<router-link to="/">Start</router-link>
-		<router-link to="/intro">Intro</router-link>
-		<router-link to="/quiz">Quiz</router-link>
+		<router-link to="/intro" v-if="getUserName">Intro</router-link>
+		<router-link to="/quiz" v-if="getUserName">Quiz</router-link>
 		<router-link to="/results">Results</router-link>
 	</nav>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+	computed: { ...mapGetters(["getUserName"]) },
+};
 </script>
 
 <style lang="scss" scoped>

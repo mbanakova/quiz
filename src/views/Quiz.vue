@@ -1,7 +1,6 @@
 <template>
 	<main class="">
-		<h1 class="">Таймер запущен! 5 минут на тест.</h1>
-		<p class="timer">{{ timer }} сек.</p>
+		<h1 class="">Таймер запущен! Осталось {{ getTimeout - timer }} сек.</h1>
 		<div class="progress">
 			<div class="progress-bar" :style="{ width: barWidth }"></div>
 			<div class="progress-status">{{ bar }} / {{ getQuestions.length }}</div>
@@ -61,13 +60,12 @@ export default {
 			wrongAnswers: 0,
 			bar: 0,
 			timer: 0,
-			timeout: 300,
 			interval: "",
 			answers: [],
 		};
 	},
 	computed: {
-		...mapGetters(["getUserCredentials", "getQuestions"]),
+		...mapGetters(["getUserCredentials", "getQuestions", "getTimeout"]),
 		answerSelected() {
 			return { focus: this.selectedAnswer };
 		},
@@ -118,6 +116,7 @@ export default {
 			const answers = this.answers;
 
 			this.$store.dispatch("saveResults", result);
+			console.log("1. ответы юзера: ", { ...answers });
 			this.$store.dispatch("addUserAnswers", answers);
 			this.$store.dispatch("addUserResult", result);
 		},
@@ -138,7 +137,7 @@ export default {
 	},
 	watch: {
 		timer() {
-			if (this.timer === this.timeout) {
+			if (this.timer === this.getTimeout) {
 				this.gameOver();
 			}
 		},
@@ -148,6 +147,7 @@ export default {
 
 <style lang="scss" scoped>
 h1 {
+	margin-bottom: 20px;
 	@media (max-width: $mobile) {
 		font-size: 18px;
 	}

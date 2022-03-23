@@ -94,15 +94,16 @@ export default {
 			} catch (error) {
 				console.log(error);
 			}
-			console.log("action fetchRating");
 			this.rating = this.$store.getters.getRating;
-			console.log("getter getRating");
 		},
 	},
 };
 </script>
 
 <style lang="scss" scoped>
+h1 {
+	margin-bottom: 20px;
+}
 .top-users {
 	display: flex;
 	flex-direction: column;
@@ -112,8 +113,8 @@ export default {
 
 table {
 	text-align: center;
+	margin-bottom: 30px;
 	border-collapse: collapse;
-	margin-bottom: 50px;
 
 	& td,
 	& th {

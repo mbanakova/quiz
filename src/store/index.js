@@ -6,18 +6,10 @@ import quiz from './quiz'
 import answers from './answers'
 
 export default createStore({
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  },
-  getters: {
-
-  },
+  state: {},
+  mutations: {},
+  actions: {},
+  getters: {},
   modules: {
     start, result, rating, quiz, answers
   }

@@ -4,15 +4,19 @@
 			<h2>Привет, {{ getUserName }}!</h2>
 			<p>Считаешь себя человеком с широким кругозором? Давай проверим!</p>
 			<p>
-				Впереди тест из 20 вопросов на самые разнообразные темы — окружающий
-				мир, история, быт, математика, география, еда, культура, животные и
-				другие.
+				Впереди тест из 20&nbsp;вопросов на&nbsp;самые разнообразные темы —
+				окружающий мир, история, быт, математика, география, еда, культура,
+				животные и&nbsp;другие.
 			</p>
 			<p>
-				Важно не только ответить правильно, но и сделать это быстрее других.
+				Важно не только ответить правильно, но и&nbsp;справиться за
+				5&nbsp;минут.
 			</p>
-			<p>В конце ты увидишь своё место в рейтинге.</p>
+			<p>В конце ты&nbsp;увидишь своё место в&nbsp;рейтинге.</p>
 			<router-link to="/quiz" class="button">Прекрасно</router-link>
+			<router-link to="/quiz" @click="beketov" class="beketov"
+				>Я Бекетов А. и мне мало 5 минут...</router-link
+			>
 		</div>
 	</main>
 </template>
@@ -22,6 +26,14 @@ import { mapGetters } from "vuex";
 export default {
 	computed: {
 		...mapGetters(["getUserName"]),
+		// timeout() {
+		// 	return 300;
+		// },
+	},
+	methods: {
+		beketov() {
+			this.$store.commit("timeout", 3000);
+		},
 	},
 };
 </script>
@@ -49,5 +61,19 @@ p {
 }
 .button {
 	align-self: flex-end;
+}
+
+.beketov {
+	align-self: flex-end;
+	color: $bright;
+	transition: $tr;
+
+	&:hover {
+		color: $blue;
+	}
+
+	&:active {
+		color: $grey;
+	}
 }
 </style>

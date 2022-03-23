@@ -116,7 +116,7 @@ export default {
 			const answers = this.answers;
 
 			this.$store.dispatch("saveResults", result);
-			console.log("1. ответы юзера: ", { ...answers });
+			// console.log("1. ответы юзера: ", { ...answers });
 			this.$store.dispatch("addUserAnswers", answers);
 			this.$store.dispatch("addUserResult", result);
 		},

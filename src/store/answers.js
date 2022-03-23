@@ -2,17 +2,7 @@
 
 export default {
   state: {
-    answers: [
-      // {
-      //   a: 0, b: 0, c: 0, d: 0,
-      // },
-      // {
-      //   a: 0, b: 0, c: 0, d: 0,
-      // },
-      // {
-      //   a: 0, b: 0, c: 0, d: 0,
-      // },
-    ],
+    answers: [],
     stats: []
   },
   mutations: {
@@ -119,7 +109,7 @@ export default {
         const error = new Error(responseData.message);
         throw error;
       }
-      console.log("3. ответы Юзер +  fb: ", { ...answers });
+      // console.log("3. ответы Юзер +  fb: ", { ...answers });
       commit("addUserAnswers", {
         ...answers
       })
@@ -144,7 +134,7 @@ export default {
         }
         answers.push(answer)
       }
-      console.log("2. ответы в fb: ", { ...answers });
+      // console.log("2. ответы в fb: ", { ...answers });
       context.commit("getAnswers", answers)
     },
     async combineStatistics(context) {
@@ -181,7 +171,7 @@ export default {
           }
         )
       }
-      console.log("4. compute stats: ", stats)
+      // console.log("4. compute stats: ", stats)
       const response = await fetch('https://quiz-49060-default-rtdb.firebaseio.com/stats.json', {
         method: 'PUT',
         body: JSON.stringify({
@@ -244,7 +234,7 @@ export default {
           }
         )
       }
-      console.log("5/ это данные стат.фаербейс: ", stats)
+      // console.log("5. это данные стат. firebase: ", stats)
       commit("fetchStatistics", stats)
     }
   },

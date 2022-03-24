@@ -13,7 +13,9 @@
 				5&nbsp;минут.
 			</p>
 			<p>В конце ты&nbsp;увидишь своё место в&nbsp;рейтинге.</p>
-			<router-link to="/quiz" class="button">Прекрасно</router-link>
+			<router-link to="/quiz" @click="timeout" class="button"
+				>Прекрасно</router-link
+			>
 			<router-link to="/quiz" @click="beketov" class="beketov"
 				>Я Бекетов А. и мне мало 5 минут...</router-link
 			>
@@ -26,11 +28,11 @@ import { mapGetters } from "vuex";
 export default {
 	computed: {
 		...mapGetters(["getUserName"]),
-		// timeout() {
-		// 	return 300;
-		// },
 	},
 	methods: {
+		timeout() {
+			this.$store.commit("timeout", 300);
+		},
 		beketov() {
 			this.$store.commit("timeout", 3000);
 		},
